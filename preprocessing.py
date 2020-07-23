@@ -9,7 +9,7 @@ def lement(str):
 df = pd.read_csv('Tweets.csv')
 
 for index, row in df.head(n = 15).iterrows():
-    tweetText = " ".join(filter(lambda x: x[0] != '#' and x[0:4] != 'http' and x[0] != '&' and x[0] != '@', row['text'].split()))
+    tweetText = " ".join(map(lambda x: x.lower(), filter(lambda x: x[0] != '#' and x[0:4] != 'http' and x[0] != '&' and x[0] != '@', row['text'].split())))
     print("Tweet : " + str(index) + "\nOriginal\n" + tweetText + "\nLemmented\n"+ lement(tweetText))
 
 
