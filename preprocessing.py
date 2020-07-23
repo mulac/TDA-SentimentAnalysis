@@ -30,13 +30,23 @@ for index, row in df.head(n = 15).iterrows():
 #https://pypi.org/project/emosent-py/
 #LOL, ikr, ttyl
 
+
+
+
 #SOOOO AMAZINGGG
 
 
-#
+#WEBSITE REVIEW
+#APP REVIEW
+#REMOVE FULLSTOP AT FRONT OF LINES
 
+#RATINGS OF AN AIRLINE 
 #Picking out uppercase. -> Emphasis
 #Exclamation marks.     -> Emphasis 
+
+#Word embeddings
+# - > word to vec
+
 #Time of year Negativity
 #Dates where there negative
 #Date ranges
