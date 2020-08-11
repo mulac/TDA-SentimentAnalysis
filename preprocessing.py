@@ -19,44 +19,9 @@ print(df)
 for index, row in df.head(n = 15).iterrows():
     tweetText = " ".join(map(lambda x: x.lower(), filter(lambda x: x[0] != '#' and x[0:4]
          != 'http' and x[0] != '&' and x[0] != '@', row['text'].split())))
+
     print("Tweet : " + str(index) + "\nOriginal\n" + tweetText + "\nLemmented\n"+
          lement(tweetText) + "\nStop words removed\n" + removeStopwords(lement(tweetText)))
-
-#Preprocessing
-
-#UNICODE
-#:) :D :-)
-#Most offen emogis
-#https://pypi.org/project/emosent-py/
-#LOL, ikr, ttyl
-
-
-
-
-#SOOOO AMAZINGGG
-
-
-#WEBSITE REVIEW
-#APP REVIEW
-#REMOVE FULLSTOP AT FRONT OF LINES
-
-#RATINGS OF AN AIRLINE 
-#Picking out uppercase. -> Emphasis
-#Exclamation marks.     -> Emphasis 
-
-#Word embeddings
-# - > word to vec
-
-#Time of year Negativity
-#Dates where there negative
-#Date ranges
-#Bag of words, most used words to describe the airline.
-#Best things -Customer service   -Rate them
-#Worst things      
-#PRICE, SPEED, CANCELLEND, DELAYED
-
-# Ranking words appearing. predicting target audience.
-
 
 
 
