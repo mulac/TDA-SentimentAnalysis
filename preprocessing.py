@@ -33,9 +33,11 @@ def preprocess_text(text, flg_stemm=False, flg_lemm=True, lst_stopwords=None):
 
 
 lst_stopwords = nltk.corpus.stopwords.words("english")
-lst_stopwords.append(["united", "americanair", "usairways", "jetblue", "virginamerica",
-                      "southwestair", "thanks", "thnx", "thank you", "flight", "thank", "get", "please", "u"])
-
+airline_stopwords = ["united", "americanair", "usairways", "jetblue", "virginamerica",
+                      "southwestair", "thanks", "thnx", "thank you", "flight", "thank", "get", "please", "u"]
+for stopword in airline_stopwords:
+  lst_stopwords.append(stopword)
+  
 df = pd.read_csv('Tweets.csv')
 df['text'] = df['text'].apply(lambda  x: preprocess_text(x))
 
