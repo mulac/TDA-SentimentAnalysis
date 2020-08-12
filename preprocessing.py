@@ -9,8 +9,9 @@ import preprocessor as p ## pip instlal tweet-preprocessor
 def preprocess_text(text, flg_stemm=False, flg_lemm=True, lst_stopwords=None):
 
   #Clean
-  text = re.sub(r'[^\w\s]', '', str(text).lower().strip())
   text = p.clean(text)
+  text = re.sub(r'[^\w\s]', '', str(text).lower().strip())
+  
   #Tokenise
   lst_text = text.split()
 
