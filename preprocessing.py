@@ -3,13 +3,14 @@ from nltk.stem import WordNetLemmatizer
 import nltk
 from nltk.corpus import stopwords
 import pandas as pd
+import preprocessor as p ## pip instlal tweet-preprocessor
 
 
 def preprocess_text(text, flg_stemm=False, flg_lemm=True, lst_stopwords=None):
 
   #Clean
   text = re.sub(r'[^\w\s]', '', str(text).lower().strip())
-
+  text = p.clean(text)
   #Tokenise
   lst_text = text.split()
 
@@ -31,6 +32,7 @@ def preprocess_text(text, flg_stemm=False, flg_lemm=True, lst_stopwords=None):
   text = " ".join(lst_text)
   return text
 
+p.set_options(p.OPT.URL, p.OPT.MENTION, p.OPT.NUMBER)
 
 lst_stopwords = nltk.corpus.stopwords.words("english")
 airline_stopwords = ["united", "americanair", "usairways", "jetblue", "virginamerica",
