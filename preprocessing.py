@@ -39,6 +39,7 @@ for stopword in airline_stopwords:
   lst_stopwords.append(stopword)
   
 df = pd.read_csv('Tweets.csv')
-df['text'] = df['text'].apply(lambda  x: preprocess_text(x))
+df["text"] = df["text"].apply(lambda x: preprocess_text(
+    x, flg_lemm=True, lst_stopwords=lst_stopwords))
 
 df.to_csv("ProcessedTweets.csv")
