@@ -4,26 +4,39 @@ import nltk
 from nltk.corpus import stopwords
 import pandas as pd
 
-stop_words = set(stopwords.words('english')) 
 
-lemmatizer = WordNetLemmatizer()
+def preprocess_text(text, flg_stemm=False, flg_lemm=True, lst_stopwords=None):
 
-def lement(str):
-    return ' '.join([lemmatizer.lemmatize(word) for word in str.split()])
+  #Clean
+  text = re.sub(r'[^\w\s]', '', str(text).lower().strip())
 
-def removeStopwords(str):
-    return ' '.join([w for w in str.split() if not w in stop_words])
+  #Tokenise
+  lst_text = text.split()
+
+  #remove Stopwords
+  if lst_stopwords is not None:
+    lst_text = [word for word in lst_text if word not in lst_stopwords]
+
+  #Stemming
+  if flg_stemm:
+    ps = nltk.stem.porter.PorterStemmer()
+    lst_text = [ps.stem(word) for word in lst_text]
+
+  #Lemmatisation
+  if flg_lemm:
+    lem = nltk.stem.wordnet.WordNetLemmatizer()
+    lst_text = [lem.lemmatize(word) for word in lst_text]
+
+  #rejoin the string
+  text = " ".join(lst_text)
+  return text
+
+
+lst_stopwords = nltk.corpus.stopwords.words("english")
+lst_stopwords.append(["united", "americanair", "usairways", "jetblue", "virginamerica",
+                      "southwestair", "thanks", "thnx", "thank you", "flight", "thank", "get", "please", "u"])
 
 df = pd.read_csv('Tweets.csv')
-print(df)
-for index, row in df.head(n = 15).iterrows():
-    tweetText = " ".join(map(lambda x: x.lower(), filter(lambda x: x[0] != '#' and x[0:4]
-         != 'http' and x[0] != '&' and x[0] != '@', row['text'].split())))
+df['text'] = df['text'].apply(lambda  x: preprocess_text(x))
 
-    print("Tweet : " + str(index) + "\nOriginal\n" + tweetText + "\nLemmented\n"+
-         lement(tweetText) + "\nStop words removed\n" + removeStopwords(lement(tweetText)))
-
-
-
-
-
+df.to_csv("ProcessedTweets.csv")
